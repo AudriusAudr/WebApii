@@ -64,23 +64,6 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shops");
-                });
-
-            modelBuilder.Entity("WebApi.Models.Entities.ItemEntities", b =>
-                {
-                    b.HasOne("WebApi.Models.Entities.ShopEntity", "Shop")
-                        .WithMany("Items")
-                        .HasForeignKey("ShopEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Shop");
-                });
-
-            modelBuilder.Entity("WebApi.Models.Entities.ShopEntity", b =>
-                {
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

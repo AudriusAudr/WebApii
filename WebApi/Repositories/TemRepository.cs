@@ -20,29 +20,24 @@ namespace WebApi.Repositories
 
         public async Task Create(ItemEntities entities)
         {
-            _dataContext.Items.Add(entities);
             await _dataContext.SaveChangesAsync();
         }
 
         public async Task<List<ItemEntities>> GetAll()
         {
-            return await _dataContext.Items.ToListAsync();
         }
 
         public async Task<ItemEntities> GetItem(int id)
         {
-            return await _dataContext.Items.FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task Update(ItemEntities entity)
         {
-            _dataContext.Items.Update(entity);
             await _dataContext.SaveChangesAsync();
         }
 
         public async Task Delete(ItemEntities entiny)
         {
-            _dataContext?.Items.Remove(entiny);
             await _dataContext?.SaveChangesAsync();
         }
 

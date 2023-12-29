@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient();
 
+
 // Add services to the container.
 //string dbConnectionString = builder.Configuration.GetConnectionString("PostgreConnection");
 //builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(dbConnectionString) );
