@@ -28,8 +28,9 @@ builder.Services.AddScoped<TemService>();
 builder.Services.AddTransient<IJsonPlaceholderClient, JsonPlaceholderClient>();
 builder.Services.AddScoped<UserService>();
 
+builder.Services.AddScoped<IShopRepository, ShopRepository>();
 builder.Services.AddScoped<ShopService>();
-builder.Services.AddScoped<ShopRepository>();
+
 
 
 string conncetion = builder.Configuration.GetConnectionString("PostgreConnection");

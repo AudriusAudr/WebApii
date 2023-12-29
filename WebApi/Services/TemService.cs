@@ -6,6 +6,7 @@ using WebApi.Exceptions;
 
 namespace WebApi.Services
 {
+    public class TemService : ITemService
     {
         private readonly ITemRepository _temRepository;
         public TemService(ITemRepository temRepository)
@@ -13,15 +14,18 @@ namespace WebApi.Services
             _temRepository = temRepository;
         }
 
+        public async Task Create(ItemDto itemDto)
         {
             var entity = new ItemEntities
             {
-                Id = itemDto.Id,
-                Name = itemDto.Name
+                Name = itemDto.Name,
+                Price = itemDto.Price,
             };
+            await _temRepository.Create(entity);
         }
 
 
+        public async Task<List<ItemDto>> GetAll()
         {
             List<ItemDto> itemDto1 = new();
             var Item = await _temRepository.GetAll();
@@ -31,8 +35,9 @@ namespace WebApi.Services
                 Name = t.Name,
             }).ToList();
             return itemDto;
-            
+
         }
+        public async Task<ItemDto> Get(int id)
         {
 
 
@@ -47,28 +52,32 @@ namespace WebApi.Services
 
         public async Task Update(ItemDto item)
         {
-          try
+            try
             {
-                
-                var itemE = new ItemEntities
-            {
-                Id = item.Id,
-                Name = item.Name,
-            };
-            await _temRepository.Update(itemE);
 
-            {
+                var itemE = new ItemEntities
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                };
+                await _temRepository.Update(itemE);
+
             }
-           
+            catch (SqlException ex)
+            {
+                throw new SqlException("Update" + ex);
+            }
+
         }
 
+        public async Task Delete(ItemDto item)
         {
             var ItemEnti = new ItemEntities() { Id = item.Id };
             await _temRepository.Delete(ItemEnti);
-           
+
         }
 
-        
+
     }
 
 }

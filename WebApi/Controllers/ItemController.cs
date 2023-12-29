@@ -3,6 +3,7 @@ using WebApi.Models.Entities;
 using WebApi.Services;
 using WebApi.Models.DataTransferObject;
 using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Controllers
 {
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         public async Task< IActionResult> Index([FromBody] ItemDto Item)
         {
             await _itemService.Create(Item);
-            return Created();
+            return Ok();
         }
 
         [HttpGet]
@@ -71,3 +72,7 @@ namespace WebApi.Controllers
 
     }   }
 }
+
+
+
+
